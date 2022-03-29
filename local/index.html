@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+      function readURL(input) {
+      // <img id="thumbnail" src="./placeholder.png" alt="your image" />
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            $('#thumbnail')
+              .attr('src', e.target.result)
+              .width(150)
+              .height(200);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+      }
+
+      .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <title>Image Prediction using PyTorch</title>
+  </head>
+  <body class="text-center">
+    <form class="form-signin" action="http://localhost:8080/predictions/resnet18" method=post enctype=multipart/form-data>
+        <h1 class="hc3 mb-3 font-weight-normal">Upload any image</h1>
+        <input type="file" name="data" class="form-control-file" id="inputfile">
+        <br/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
+    </form>
+    <script type="text/javascript">
+      // original url: "http://localhost:8080/predictions/resnet18" 
+      $('#inputfile').bind('change', function() {
+          let ext = $('#inputfile').val().split('.').pop().toLowerCase();
+          if($.inArray(ext, ['jpg','jpeg']) == -1) {
+            $("#inputfile").val(null);
+            alert('only jpeg/jpg files are allowed!');
+          }
+      });
+      // $('#inputfile').bind('submit', function(event) {
+      //   console.log(event);
+      //   alert('submitted');
+      // });
+    </script>
+  </body>
+</html>
