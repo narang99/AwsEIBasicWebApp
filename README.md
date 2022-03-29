@@ -1,4 +1,5 @@
-
+A Basic Image classifier built using PyTorch and served using Multi-model-server running on AWS EC2 instances configured to use Elastic Inference.  
+It launches a backend model server and a webapp where you can upload bees or ants images and classify them.  
 
 # Usage
 
